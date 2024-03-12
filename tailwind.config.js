@@ -8,7 +8,14 @@ module.exports = withMT({
       
     },
     colors: {
-      "darkBg":"#222831",
+      "dark-bg":"#18191A",
+      "dark-block": "#242526",
+
+      "primary": "8C52FF",
+      
+      "dark-primary": "#526D82",
+      "dark-secondary": "#910A67"
+     
     },
   },
   plugins: [],

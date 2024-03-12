@@ -37,6 +37,7 @@ import {
   Bars2Icon,
   SunIcon,
 } from "@heroicons/react/24/solid";
+import { LogoFull } from "../Logo/LogoFull";
 
 // profile menu component
 const profileMenuItems = [
@@ -64,7 +65,7 @@ const profileMenuItems = [
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [theme, setTheme] = useState(null);
+  const [theme, setTheme] = useState("dark");
   const closeMenu = () => setIsMenuOpen(false);
 
   useEffect(() => {
@@ -206,7 +207,7 @@ const navListItems = [
 
 function NavList() {
   return (
-    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+    <ul className="mt-2 mb-4 flex flex-col lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       
       {navListItems.map(({ label, icon }, key) => (
         <Typography
@@ -217,7 +218,7 @@ function NavList() {
           color="gray"
           className="font-medium text-blue-gray-500"
         >
-          <MenuItem className="flex items-center gap-2 lg:rounded-full dark:text-white dark:hover:text-black">
+          <MenuItem className="flex items-center gap-2 lg:rounded lg:px-8 dark:text-white dark:hover:text-black">
             <Tooltip content={label}>{icon}</Tooltip>
             <Typography
               as={"span"}
@@ -245,14 +246,14 @@ export function AuthenticatedNav() {
   }, []);
 
   return (
-    <Navbar className="w-full m-auto p-2 lg:pl-6 dark:bg-blue-gray-800 dark:border-blue-gray-700 rounded-none lg:rounded-md">
+    <Navbar className="w-full m-auto p-2 lg:pl-6 dark:bg-dark-block dark:border-gray-800 rounded-none lg:rounded-md">
       <div className="relative  flex  items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
           href="#"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium dark:text-white"
         >
-          Cheebo
+          <LogoFull className="max-w-24 outline-none"/>
         </Typography>
         <div className="hidden lg:block">
           <NavList />
