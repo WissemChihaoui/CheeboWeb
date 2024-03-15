@@ -3,9 +3,11 @@ import { AuthenticatedNav } from '../comps/Nav/AuthenticatedNav'
 
 const AuthenticatedLayout = ({ children }) => {
   return (
-    <div className='h-screen bg-blue-gray-200 dark:bg-dark-bg pt-4'>
+    <div className=' bg-blue-gray-200 dark:bg-dark-bg pt-0'>
         <AuthenticatedNav />
-        {children}
+        <div className='pb-4 pt-24 mx-3 dark:text-white'>
+          {children}
+        </div>
     </div>
   )
 }

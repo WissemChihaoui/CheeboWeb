@@ -108,7 +108,7 @@ function ProfileMenu() {
             />
           </Button>
         </MenuHandler>
-        <MenuList className="p-1 dark:bg-blue-gray-800 dark:text-white">
+        <MenuList className="p-1 dark:bg-dark-block dark:text-white">
           <MenuItem
             key={"theme"}
             onClick={handleThemeSwitch}
@@ -190,26 +190,31 @@ const navListItems = [
   {
     label: "Home",
     icon: <IconHome />,
+    link:"/",
   },
   {
     label: "Chats",
     icon: <IconMessage />,
+    link:"/chat"
   },
   {
     label: "Tips",
     icon: <IconRibbonHealth />,
+    link:"/tips"
   },
   {
     label: "Adoption",
     icon: <IconCat />,
+    link:"/adoption"
   },
 ];
 
 function NavList() {
+  const currentPathname = window.location.pathname;
   return (
     <ul className="mt-2 mb-4 flex flex-col lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       
-      {navListItems.map(({ label, icon }, key) => (
+      {navListItems.map(({ label, icon, link }, key) => (
         <Typography
           key={label}
           as="a"
@@ -218,7 +223,7 @@ function NavList() {
           color="gray"
           className="font-medium text-blue-gray-500"
         >
-          <MenuItem className="flex items-center gap-2 lg:rounded lg:px-8 dark:text-white dark:hover:text-black">
+          <MenuItem className={` ${currentPathname === link ? "border-b-primary border-b-4" : ""} flex items-center gap-2 lg:rounded lg:px-8 dark:text-white dark:hover:text-black`}>
             <Tooltip content={label}>{icon}</Tooltip>
             <Typography
               as={"span"}
@@ -235,6 +240,7 @@ function NavList() {
 
 export function AuthenticatedNav() {
   const [isNavOpen, setIsNavOpen] = React.useState(false);
+  
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
 
@@ -246,7 +252,7 @@ export function AuthenticatedNav() {
   }, []);
 
   return (
-    <Navbar className="w-full m-auto p-2 lg:pl-6 dark:bg-dark-block dark:border-gray-800 rounded-none lg:rounded-md">
+    <Navbar className="w-full fixed left-1/2 -translate-x-1/2 m-auto p-2 lg:pl-6 dark:bg-dark-block dark:border-gray-800 rounded-none lg:rounded-md">
       <div className="relative  flex  items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
