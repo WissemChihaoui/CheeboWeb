@@ -1,24 +1,28 @@
 import React from 'react'
-import Stories from '../comps/Stories/Stories'
-import Post from '../comps/Post/Post'
+import { Outlet } from 'react-router-dom'
+
 import AuthenticatedLayout from '../layouts/AuthenticatedLayout'
 import PostsLayout from '../layouts/PostsLayout'
+import StorieWrapper from '../layouts/StorieWrapper'
 
-export const Home = () => {
+const Home = () => {
   return (
-    <AuthenticatedLayout>
-        <div className="grid grid-cols-12 gap-2">
-          <div className='col-span-3'>
-            
+    
+        <div className="grid grid-cols-4 gap-4 ">
+          <div className='relative'>
+           <div className="fixed">leftSide</div>
           </div>
-          <div className='col-span-6'>
-            <Stories />
-            <PostsLayout />
+          <div className='col-span-2'>
+            <StorieWrapper />
+            <Outlet />
           </div>
-          <div className='col-span-3'>
-
+          <div className='relative'>
+            <div className="fixed">
+              rightSide
+            </div>
           </div>
         </div>
-    </AuthenticatedLayout>
+    
   )
 }
+ export default Home;

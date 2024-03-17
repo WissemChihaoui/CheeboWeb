@@ -1,12 +1,13 @@
-import React, { Children } from 'react'
+import React from 'react'
+import { Outlet } from 'react-router-dom'
 import { AuthenticatedNav } from '../comps/Nav/AuthenticatedNav'
 
-const AuthenticatedLayout = ({ children }) => {
+const AuthenticatedLayout = () => {
   return (
-    <div className=' bg-blue-gray-200 dark:bg-dark-bg pt-0'>
+    <div className=' bg-blue-gray-200 dark:bg-dark-bg pt-0 min-h-screen'>
         <AuthenticatedNav />
         <div className='pb-4 pt-24 mx-3 dark:text-white'>
-          {children}
+          <Outlet />
         </div>
     </div>
   )

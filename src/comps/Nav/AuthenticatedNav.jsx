@@ -21,6 +21,9 @@ import {
   IconMoon,
   IconSun,
   IconBell,
+  IconBuildingStore,
+  IconSunMoon,
+  IconMoon2
 } from "@tabler/icons-react";
 import {
   CubeTransparentIcon,
@@ -33,11 +36,13 @@ import {
   LifebuoyIcon,
   PowerIcon,
   MoonIcon,
-  RocketLaunchIcon,
+  PencilSquareIcon,
   Bars2Icon,
   SunIcon,
 } from "@heroicons/react/24/solid";
 import { LogoFull } from "../Logo/LogoFull";
+import { HealthMass } from "../../assets/Health-Mass.png"
+import { Link,useLocation  } from "react-router-dom";
 
 // profile menu component
 const profileMenuItems = [
@@ -47,16 +52,19 @@ const profileMenuItems = [
   },
   {
     label: "Edit Profile",
+    icon: PencilSquareIcon,
+  },
+  
+  
+  {
+    label: "Settings",
     icon: Cog6ToothIcon,
   },
   {
-    label: "Inbox",
-    icon: InboxArrowDownIcon,
-  },
-  {
-    label: "Help",
+    label: "Contact Us",
     icon: LifebuoyIcon,
   },
+  
   {
     label: "Sign Out",
     icon: PowerIcon,
@@ -65,21 +73,7 @@ const profileMenuItems = [
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [theme, setTheme] = useState("dark");
   const closeMenu = () => setIsMenuOpen(false);
-
-  useEffect(() => {
-    if (theme === "dark") {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [theme]);
-
-  const handleThemeSwitch = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
-
   return (
     <div className="flex items-center gap-3">
       <Typography as="a" href="#">
@@ -109,47 +103,7 @@ function ProfileMenu() {
           </Button>
         </MenuHandler>
         <MenuList className="p-1 dark:bg-dark-block dark:text-white">
-          <MenuItem
-            key={"theme"}
-            onClick={handleThemeSwitch}
-            className="flex item-center gap-2 rounded"
-          >
-            {theme === "dark"
-              ? <React.Fragment>
-              {React.createElement(SunIcon, {
-                  className: `h-4 w-4`,
-                  strokeWidth: 2,
-                })}
-                
-                  <Typography
-                    as="span"
-                    variant="small"
-                    className="font-normal"
-                    color={"inherit"}
-                  >
-                    Light Mode
-                  </Typography>
-                
-                </React.Fragment>
-              : 
-              <React.Fragment>
-              {React.createElement(MoonIcon, {
-                  className: `h-4 w-4`,
-                  strokeWidth: 2,
-                })}
-                
-                  <Typography
-                    as="span"
-                    variant="small"
-                    className="font-normal"
-                    color={"inherit"}
-                  >
-                    Dark Mode
-                  </Typography>
-                
-                </React.Fragment>
-                }
-          </MenuItem>
+         
 
           {profileMenuItems.map(({ label, icon }, key) => {
             const isLastItem = key === profileMenuItems.length - 1;
@@ -184,46 +138,130 @@ function ProfileMenu() {
   );
 }
 
+function ThemeMood(){
+  const [isMoodMenuOpen, setIsMoodMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
+  const closeMenu = () => setIsMoodMenuOpen(false);
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("moon");
+    } else if(theme === "light") {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.remove("moon");
+    }else if(theme === "moon"){
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("moon");
+    }
+  }, [theme]);
+
+  const handleThemeChange = (theme) => {
+    setTheme(theme);
+  };
+  return (
+    <Menu
+      open={isMoodMenuOpen}
+      handler={setIsMoodMenuOpen}
+      placement="bottom-end"
+    >
+      <MenuHandler>
+        <IconButton
+          size="sm"
+          color="blue-gray"
+          variant="text"
+          className="ml-auto mr-2 dark:text-white"
+        >
+          <IconSunMoon className="h-6 w-6" />
+        </IconButton>
+      </MenuHandler>
+      <MenuList className="p-1 dark:bg-dark-block dark:text-white">
+  <MenuItem
+    key={"light-mode"}
+    onClick={() => handleThemeChange("light")}
+    className={`flex item-center gap-2 rounded ${theme === "light"? "bg-primary text-black" : ""}`}
+    disabled={theme === "light"}
+  >
+    <IconSun className="" strokeWidth={2} />
+    <Typography as="span" variant="small" className="font-normal" color="inherit">
+      Light Mode
+    </Typography>
+  </MenuItem>
+  <MenuItem
+    key={"dark-mode"}
+    onClick={() => handleThemeChange("dark")}
+    className={`flex item-center gap-2 rounded ${theme === "dark"? "bg-primary text-white" : ""}`}
+    disabled={theme === "dark"}
+  >
+    <IconMoon className="" strokeWidth={2} />
+    <Typography as="span" variant="small" className="font-normal" color="inherit">
+      Dark Mode
+    </Typography>
+  </MenuItem>
+  <MenuItem
+    key={"moon-mode"}
+    onClick={() => handleThemeChange("moon")}
+    className={`flex item-center gap-2 rounded ${theme === "moon"? "bg-primary" : ""}`}
+    disabled={theme === "moon"}
+  >
+    <IconMoon2 className="" strokeWidth={2} />
+    <Typography as="span" variant="small" className="font-normal" color="inherit">
+      Moon Mode
+    </Typography>
+  </MenuItem>
+</MenuList>
+
+    </Menu>
+  );
+}
 
 // nav list component
 const navListItems = [
   {
     label: "Home",
     icon: <IconHome />,
-    link:"/",
+    link:["/","/follows"],
   },
   {
     label: "Chats",
     icon: <IconMessage />,
-    link:"/chat"
+    link:["/chat"]
   },
   {
-    label: "Tips",
+    label: "Health Care",
     icon: <IconRibbonHealth />,
-    link:"/tips"
+    link:["/health"]
+  },
+  {
+    label: "Cheebo Store",
+    icon: <IconBuildingStore />,
+    link:["/health"]
   },
   {
     label: "Adoption",
     icon: <IconCat />,
-    link:"/adoption"
+    link:["/adoption"]
   },
 ];
 
 function NavList() {
-  const currentPathname = window.location.pathname;
+  const location = useLocation();
   return (
     <ul className="mt-2 mb-4 flex flex-col lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
       
       {navListItems.map(({ label, icon, link }, key) => (
         <Typography
           key={label}
-          as="a"
-          href="#"
+          as="span"
+         
           variant="small"
           color="gray"
-          className="font-medium text-blue-gray-500"
+          className="font-medium text-white dark:text-blue-gray-500"
         >
-          <MenuItem className={` ${currentPathname === link ? "border-b-primary border-b-4" : ""} flex items-center gap-2 lg:rounded lg:px-8 dark:text-white dark:hover:text-black`}>
+          <Link to={link[0]} className={link.includes(location.pathname)? "pointer-events-none":""}>
+          <MenuItem className={`${
+                link.includes(location.pathname) ? "border-b-primary border-b-4 pointer-events-none" : ""
+              } flex items-center gap-2 lg:rounded lg:px-8 dark:text-white dark:hover:text-black dark:hover:bg-secondary  dark:active:text-white focus:bg-none active:bg-none `}>
             <Tooltip content={label}>{icon}</Tooltip>
             <Typography
               as={"span"}
@@ -232,6 +270,7 @@ function NavList() {
                 {label}
               </Typography>
           </MenuItem>
+          </Link>
         </Typography>
       ))}
     </ul>
@@ -252,7 +291,7 @@ export function AuthenticatedNav() {
   }, []);
 
   return (
-    <Navbar className="w-full fixed left-1/2 -translate-x-1/2 m-auto p-2 lg:pl-6 dark:bg-dark-block dark:border-gray-800 rounded-none lg:rounded-md">
+    <Navbar className="w-full fixed z-[100] left-1/2 -translate-x-1/2 m-auto p-2 lg:pl-6 bg-primary border-transparent dark:bg-dark-block dark:border-gray-800 moon:bg-primary rounded-none lg:rounded-md">
       <div className="relative  flex  items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
@@ -267,6 +306,7 @@ export function AuthenticatedNav() {
         
         <div className="flex gap-1 items-center
         ">
+          <ThemeMood />
         <IconButton
           size="sm"
           color="blue-gray"

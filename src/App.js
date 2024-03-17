@@ -1,9 +1,12 @@
 import './App.css';
-import { Button } from "@material-tailwind/react";
-import { Home } from './pages/Home';
+import { RouterProvider } from 'react-router-dom';
+import router from './Routes';
+
 function App() {
   return (
-    <Home />
+    <>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

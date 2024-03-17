@@ -2,8 +2,9 @@ import React from "react";
 import { 
     Button,
     Avatar,
-    Typography, } from "@material-tailwind/react";
-
+    Typography } from "@material-tailwind/react";
+import Messagerie from "../../assets/Messagerie.png"
+import {IconUserPlus} from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 const ProfilePopover = () => {
   return (
@@ -21,10 +22,10 @@ const ProfilePopover = () => {
         <Typography
         variant="h5"
         
-        className="mb-2 flex flex-col gap-1 font-medium text-primary"
+        className="mb-2 flex flex-col gap-1 font-medium dark:text-white"
       >
         <a href={'/user/id'}>Tania Andrew</a>
-        <span className="text-sm font-medium text-secondary">
+        <span className="text-sm font-medium text-gray-300">
           Tunisia
         </span>
       </Typography>
@@ -33,28 +34,28 @@ const ProfilePopover = () => {
       <Typography
         variant="small"
         color="gray"
-        className="font-normal text-secondary"
+        className="font-normal text-gray-300"
       >
         Frontend Developer • Major interest in Web Development: motivated to
         achieve measurable results, to deepen my knowledge and improve my
         skills.
       </Typography>
-      <div className="mt-6 flex items-center justify-between  border-t border-blue-gray-50 pt-4">
+      <div className="mt-6 flex items-center gap-4 border-t border-blue-gray-50 dark:border-gray-800 pt-4">
         <Button
           variant="small"
           color="gray"
-          className="flex items-center gap-2 text-sm font-normal text-secondary"
+          className="flex justify-center items-center gap-3  text-sm font-normal text-gray-300 flex-1"
         >
-          
-          <span>Add Friend</span>
+          <IconUserPlus className="text-primary"/>
+          <span className="text-base font-semibold capitalize mr-4">Add Friend</span>
         </Button>
         <Button
           variant="small"
           color="gray"
-          className="flex items-center gap-2 text-sm font-normal text-secondary"
+          className="flex items-center gap-2 text-sm font-normal text-gray-300"
         >
+          <img src={Messagerie} alt="send message" className="w-6"/>
           
-          <span>Message</span>
         </Button>
       </div>
     </React.Fragment>
