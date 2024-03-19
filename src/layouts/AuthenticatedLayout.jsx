@@ -6,7 +6,7 @@ const AuthenticatedLayout = () => {
   return (
     <div className=' bg-blue-gray-200 dark:bg-dark-bg pt-0 min-h-screen'>
         <AuthenticatedNav />
-        <div className='pb-4 pt-24 mx-3 dark:text-white'>
+        <div className='pb-4 pt-24 px-6 mx-3 dark:text-white'>
           <Outlet />
         </div>
     </div>

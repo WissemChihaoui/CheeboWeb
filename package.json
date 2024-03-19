@@ -5,6 +5,8 @@
   "dependencies": {
     "@heroicons/react": "^2.1.1",
     "@material-tailwind/react": "^2.1.9",
+    "@splinetool/react-spline": "^2.2.6",
+    "@splinetool/runtime": "^1.0.68",
     "@tabler/icons-react": "^2.47.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
