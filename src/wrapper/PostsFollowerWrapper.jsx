@@ -1,14 +1,16 @@
 import React from "react";
 import Post from "../comps/Post/Post";
+import PostsData from "../data/PostsData";
 
 const PostsFollowerWrapper = () => {
   return (
     <>
-    Yosra
-      <Post />
-      <Post />
-      <Post />
-    </>
+    <div className="flex flex-col gap-3">
+      {PostsData.map((post) => (
+        <Post id={post.id} />
+      ))}
+    </div>
+  </>
   );
 };
 

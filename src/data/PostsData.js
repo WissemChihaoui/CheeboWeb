@@ -2,9 +2,9 @@ const postsData = [
     {
         "id": 1,
         "creature": 1,
-        "content": "I love you yosra a lot, and I will never leave you <3",
+        "content": "cats are the best thing could exist #cats",
         "picture": "http://placekitten.com/200/300",
-        "createdAt": "03/17/2024 01:00",
+        "createdAt": "03/19/2024 00:00",
         "paws": [
             { "userId": 2 },
             { "userId": 3 },
@@ -18,7 +18,7 @@ const postsData = [
     {
         "id": 2,
         "creature": 1,
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "content": "Lorem ipsum #dolor sit amet, consectetur adipiscing elit.",
         "picture": "http://placekitten.com/200/300",
         "createdAt": "03/17/2024 02:00",
         "paws": [

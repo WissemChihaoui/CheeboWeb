@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import CreatePostHome from "../comps/CreatePost/CreatePostHome";
 import Post from "../comps/Post/Post";
 import {
@@ -10,21 +10,30 @@ import {
 } from "@material-tailwind/react";
 import Posts from "../wrapper/Posts";
 import PostsFollowerWrapper from "../wrapper/PostsFollowerWrapper";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const PostsLayout = () => {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState(null);
+  const location = useLocation();
+  
+  useEffect(() => {
+    // Extract pathname from location
+    const pathname = location.pathname;
+    console.log(pathname)
+    // Set activeTab based on pathname
+    setActiveTab(pathname);
+  });
   const data = [
     {
       label: "All Posts",
       link: "/",
-      value: "all",
+      value: "/",
       element: <Posts />,
     },
     {
       label: "Following",
       link: "/follows",
-      value: "following",
+      value: "/follows",
       element: <PostsFollowerWrapper />,
     },
   ];
