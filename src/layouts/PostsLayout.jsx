@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import CreatePostHome from "../comps/CreatePost/CreatePostHome";
 import Post from "../comps/Post/Post";
 import {
@@ -10,19 +10,12 @@ import {
 } from "@material-tailwind/react";
 import Posts from "../wrapper/Posts";
 import PostsFollowerWrapper from "../wrapper/PostsFollowerWrapper";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 
 const PostsLayout = () => {
-  const [activeTab, setActiveTab] = useState(null);
-  const location = useLocation();
-  
-  useEffect(() => {
-    // Extract pathname from location
-    const pathname = location.pathname;
-    console.log(pathname)
-    // Set activeTab based on pathname
-    setActiveTab(pathname);
-  });
+
+  const navigate = useNavigate()
+
   const data = [
     {
       label: "All Posts",
@@ -40,15 +33,26 @@ const PostsLayout = () => {
   return (
     <div className="flex flex-col gap-4 items-center">
       <CreatePostHome />
-      <Tabs value={activeTab} className="z-1 relative">
+      <Tabs value={useLocation().pathname} className="z-1 relative">
         <TabsHeader className="rounded-none max-w-2xl m-auto bg-transparent p-0 dark:text-white w-full">
-          {data.map(({ label, value, link }) => (
-            <Link to={link} className="w-full">
-            <Tab key={value} value={value} onClick={() => setActiveTab(value)} className={`ease-in duration-300 text-xl font-bold ${activeTab === value ? "text-gray-900" : "text-white"}`}>
-              {label}
-            </Tab>
-            </Link>
-          ))}
+          {data.map(({ label, value, link }) => {
+            console.log({ label, value, link });
+            return (
+              <Tab
+                key={value}
+                value={value}
+                onClick={() => navigate(link)}
+                className={`ease-in duration-300 text-xl font-bold text-white has-[.isActive]:text-gray-900`}
+              >
+                <NavLink
+                  to={link}
+                  className={({ isActive }) => isActive && "isActive"}
+                >
+                  {label}
+                </NavLink>
+              </Tab>
+            );
+          })}
         </TabsHeader>
         <TabsBody>
           <Outlet />

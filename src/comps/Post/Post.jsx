@@ -19,7 +19,6 @@ const Post = ({id}) => {
   const [iLike, setILike] = useState(false);
   const [pawNumber, setPawNumber] = useState(0)
   const [openPostView, setOpenImageView] = useState(false);
-  console.log(openPostView)
   const [openPopover, setOpenPopover] = useState(false);
 
   const triggers = {
